@@ -83,6 +83,21 @@ int main() {
 			vDriver = new ViewportDriver(0,0,canvas,fbDriver);        		
 			while(1){			
 				//cout << p.getX() << " " << p.getY() << endl;
+                    Mice pMouse = mouseController();
+        // cout << "test1" << endl;
+        // fbDriver.clearScreen();
+        vDriver->renderCanvas();
+        // cout << "test2" << endl;
+        xMouse = (xMouse+pMouse.coorMouse.getX() > WIDTH) ?WIDTH :((xMouse+pMouse.coorMouse.getX() < 0) ?0 :(xMouse+pMouse.coorMouse.getX()));
+        yMouse = (yMouse+pMouse.coorMouse.getY() > HEIGHT) ?HEIGHT :((yMouse+pMouse.coorMouse.getY() < 0) ?0 :(yMouse+pMouse.coorMouse.getY()));
+        setPointer(xMouse, yMouse);
+        if(pMouse.clicked==1 && yMouse >=0 && yMouse< HEIGHT && xMouse >=0 && yMouse < WIDTH) {
+            color_map[yMouse][xMouse].cR = 0;
+            color_map[yMouse][xMouse].cG = 0;
+            color_map[yMouse][xMouse].cB = 0;
+        }
+
+    
         			nanosleep(delay,NULL);
 				if(menu != 3){
 					break;				
@@ -92,7 +107,16 @@ int main() {
 			home.render();
 			nanosleep(delay,NULL);		
 		}
-    	}
+    }
+
+   while(1){
+        // test
+        // cout << "test0" << endl;
+        //print viewport di sini
+        //cout << p.getX() << " " << p.getY() << endl;
+        nanosleep(delay,NULL);
+    }
+
 
 	garbageCaptureKeyboard();
 
@@ -189,25 +213,29 @@ void initCaptureKeyboard() {
                     case 103:
                         // Up arrow trigger
                         //P1.setY(P1.getY() - 1);
+                        if(menu==3)
                         vDriver->moveUp();
                         break;
                     case 105:
                         // Left arrow trigger
                         //P1.setX(P1.getX() - 1);
 			//cout << "leftarrow" << endl;
-			vDriver->moveLeft();
+			         if(menu==3)
+                     vDriver->moveLeft();
 				
                         break;
 
                     case 106:
                         // Right arrow trigger
                         //P1.setX(P1.getX() + 1);
+                    if(menu==3)
 			vDriver->moveRight();
 			//cout << "right" << endl;
                         break;
                     case 108:
                         // Down arrow trigger
                         //P1.setY(P1.getY() + 1);
+                    if(menu==3)
 			vDriver->moveDown();
                         break;
 

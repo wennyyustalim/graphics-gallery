@@ -50,12 +50,7 @@ void ViewportDriver::renderCanvas() {
 	fprintf(stderr, "rendering canvas\n");
 	std::vector<std::vector<RGB>> matrix = canvas->getMatrix();
 	fprintf(stderr, "%d %d\n", matrix.size(), matrix[0].size());
-	// for(int i=0;i<matrix.size();i++) {
-	// 	for(int j=0; j<matrix[i].size();j++) {
-	// 		fprintf(stderr, "%d %d:\n", i,j);
-	// 		RGB rgb = matrix[i][j];
-	// 	}
-	// }
+
 	for(int r = VIEWPORT_START_Y; r < VIEWPORT_HEIGHT+VIEWPORT_START_Y; r++) {
 		for(int c = VIEWPORT_START_X; c < VIEWPORT_WIDTH+VIEWPORT_START_X;c++) {
 			// fprintf(stderr, "rendering: %d %d %d %d\n",r,c,y_offset,x_offset);
@@ -69,36 +64,4 @@ void ViewportDriver::renderCanvas() {
 			}
 		}
 	}
-	
-	//~ for(int r = VIEWPORT_START_Y; r < VIEWPORT_HEIGHT+VIEWPORT_START_Y; r++) {
-			//~ for(int c = VIEWPORT_START_X; c < VIEWPORT_WIDTH+VIEWPORT_START_X;c++) {
-			//~ for(Renderable* i: canvas->getRenderables()) {
-				//~ int re = i->getRed();
-				//~ int b = i->getBlue();
-				//~ int g = i->getGreen();
-				//~ bool f = i->getPixels()[r][c];
-				//~ if(f) {
-					//~ fb_driver.printPixel(r,c,re,g,b);
-
-				//~ }
-			//~ }
-		//~ }
-	//~ }
-	// for(Renderable* i: canvas->getRenderables()) {
-	// 	int r = i->getRed();
-	// 	int b = i->getBlue();
-	// 	int g = i->getGreen();
-	// 	for(auto j : i->getPixels()) {
-	// 		for(auto k : j.second) {
-	// 			int x = j.first;
-	// 			int y = k.first;
-	// 			fprintf(stderr, "GetPixel in %d %d\n", x,y);
-	// 				if(isPointInViewPort(j.first, k.first) && k.second) {
-	// 					fb_driver.printPixel(x,y,r,g,b);
-	// 				}
-	// 		}
-	// 	}
-	// }
-
 }
-
