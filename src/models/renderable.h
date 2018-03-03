@@ -18,20 +18,20 @@ class Renderable {
         }
         std::unordered_map<int, std::unordered_map<int, bool> >& getPixels();
         static std::vector<Renderable *> parseFile(std::string filename,double, int, int, int);
-		/*
-		 * Generate borders in pixels
-		 */
-		void createBorder();
-		/*
-		 * Rastering color in pixels
-		 */
-		void rasterColor();
+	/*
+	 * Generate borders in pixels
+	 */
+	void createBorder();
+	/*
+	 * Rastering color in pixels
+	 */
+	void rasterColor();
 
-		void setColor(int r,int g, int b);
+	void setColor(int r,int g, int b);
 
-		int getRed();
-		int getBlue();
-		int getGreen();
+	int getRed();
+	int getBlue();
+	int getGreen();
 };
 
 #endif

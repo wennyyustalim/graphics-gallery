@@ -48,53 +48,59 @@ void initCaptureKeyboard();
 void garbageCaptureKeyboard();
 void startKeystrokeThread();
 ViewportDriver *vDriver;
-Point p(2,5);
+Point p(0,0);
 const struct timespec* delay = (const struct timespec[]){{0,2*16666667L}};
 FramebufferDriver fbDriver;
+int menu = 0;
+
 int main() {
-
-
-
+	RenderHome home;
+	home.render();
+	startKeystrokeThread();
+	
     vector<Renderable * > bangunan = Renderable::parseFile("res/bangunanitb.txt", 1,20,20,255);
     vector<Renderable * > jalan = Renderable::parseFile("res/jalan2.txt", 1.37, 20,20,20);
     jalan.insert(jalan.end(),bangunan.begin(), bangunan.end());
 
     Canvas* canvas = new Canvas(jalan);
-	
+    
     fbDriver.init();
     fbDriver.clearScreen();
-    vDriver = new ViewportDriver(0,0,canvas, fbDriver);
-
+	
+	
+	int dum = 9;
+	//cin >> dum;
+    
+    startDevice();
+    int xMouse = 0, yMouse = 0;
     startKeystrokeThread();
+
+
+	
+	while(1){
+		//cout << menu << endl;
+        	if(menu == 3){//print viewport di sini
+			vDriver = new ViewportDriver(0,0,canvas,fbDriver);        		
+			while(1){			
+				//cout << p.getX() << " " << p.getY() << endl;
+        			nanosleep(delay,NULL);
+				if(menu != 3){
+					break;				
+				}
+			}
+		}else if(menu == 0){
+			home.render();
+			nanosleep(delay,NULL);		
+		}
+    	}
+
+	garbageCaptureKeyboard();
+
+
 	// int dum;
  //    cin >> dum;
 
-    startDevice();
-    int xMouse = 0, yMouse = 0;
 
-    while(1){
-        // test
-        // cout << "test0" << endl;
-        Mice pMouse = mouseController();
-        // cout << "test1" << endl;
-        // fbDriver.clearScreen();
-        vDriver->renderCanvas();
-        // cout << "test2" << endl;
-        xMouse = (xMouse+pMouse.coorMouse.getX() > WIDTH) ?WIDTH :((xMouse+pMouse.coorMouse.getX() < 0) ?0 :(xMouse+pMouse.coorMouse.getX()));
-        yMouse = (yMouse+pMouse.coorMouse.getY() > HEIGHT) ?HEIGHT :((yMouse+pMouse.coorMouse.getY() < 0) ?0 :(yMouse+pMouse.coorMouse.getY()));
-        setPointer(xMouse, yMouse);
-        if(pMouse.clicked==1 && yMouse >=0 && yMouse< HEIGHT && xMouse >=0 && yMouse < WIDTH) {
-            color_map[yMouse][xMouse].cR = 0;
-            color_map[yMouse][xMouse].cG = 0;
-            color_map[yMouse][xMouse].cB = 0;
-        }
-
-        //print viewport di sini
-        //cout << p.getX() << " " << p.getY() << endl;
-        nanosleep(delay,NULL);
-    }
-
-    garbageCaptureKeyboard();
 }
 
 void initCaptureKeyboard() {
@@ -141,16 +147,29 @@ void initCaptureKeyboard() {
             if(ev.value == 1) // when it pressed
 
                 switch(ev.code){
-                    case 12:
-                        // Minus triggered
+                    case 2:
+			//1 pressed
+                        // 12 Minus triggered
                         //if(scale > 1) scale--;
-                        cout<<"Minus"<<endl;
+                        cout<<"you choose 1"<<endl;
                         break;
-                    case 13:
-                        // plus triggered
+                    case 3:
+                        // 13 plus triggered
                         //if(scale < 10) scale++;
-                        cout<<"Plus"<<endl;
+                        cout<<"you choose 2"<<endl;
                         break;
+		    case 4:
+                        // 13 plus triggered
+                        //if(scale < 10) scale++;
+                        //cout<<"you choose 3"<<endl;
+			menu = 3;                        
+			break;
+		    case 11:
+                        // 13 plus triggered
+                        //if(scale < 10) scale++;
+                        //cout<<"you choose 3"<<endl;
+			menu = 0;                        
+			break;
                     case 25:
                         // P trigger
                         //p ^= 1;
