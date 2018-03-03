@@ -69,7 +69,7 @@ void ViewportDriver::renderCanvas() {
 	 			int y = k.first;
 	 			//~ fprintf(stderr, "GetPixel in %d %d\n", x,y);
 	 				if(isPointInViewPort(j.first, k.first) && k.second) {
-	 					fb_driver.printPixel(x-offset,y-,r,g,b);
+	 					fb_driver.printPixel(x-x_offset,y-y_offset,r,g,b);
 	 				}
 	 		}
 	 	}

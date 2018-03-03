@@ -32,7 +32,7 @@ vector<Renderable *> Renderable::parseFile(string filename, double scale, int re
         result.push_back(buffer);
         buffer->setColor(red, green, blue);
         buffer->createBorder();
-        //buffer->rasterColor();
+        buffer->rasterColor();
     }
     return result;
 }
