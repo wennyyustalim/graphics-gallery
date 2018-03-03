@@ -10,8 +10,10 @@ Point p(2,5);
 const struct timespec* delay = (const struct timespec[]){{0,2*16666667L}};
 
 int main() {
+	RenderHome home;
+	home.render();
 
-
+/*
 
     vector<Renderable * > bangunan = Renderable::parseFile("res/bangunanitb.txt", 1,20,20,255);
     vector<Renderable * > jalan = Renderable::parseFile("res/jalan2.txt", 1.37, 20,20,20);
@@ -29,6 +31,7 @@ int main() {
     }
 
     garbageCaptureKeyboard();
+*/
 }
 
 void initCaptureKeyboard() {
