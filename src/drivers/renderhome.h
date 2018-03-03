@@ -11,7 +11,7 @@ class RenderHome{
 		void scanFont();
 		void renderFont(string text, int idxBaris, int idxKolom, int red, int green, int blue);
 	private:
-		FramebufferDriver fb;
+		FramebufferDriver fbd;
 		char a[960][35];
 };
 

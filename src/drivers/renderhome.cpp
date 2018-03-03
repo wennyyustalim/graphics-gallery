@@ -2,12 +2,12 @@
 using namespace std;
 
 RenderHome::RenderHome(){
-	fb.init();
+	fbd.init();
 	scanFont();
 }
 
 void RenderHome::render(){
-	fb.clearScreen();
+	fbd.clearScreen();
 	string text = "WELCOME TO";
 	renderFont(text,90,250,3,79,0);	
 	text = "UPNORMAL GALLERY";
@@ -41,9 +41,9 @@ void RenderHome::renderFont(string text, int idxBaris, int idxKolom, int red, in
         for (y = idxBaris; y < idxBaris+32; y++){
             for (x = idxKolom; x < idxKolom+32; x++) {
 		if(a[absis][ordinat] == '0'){
-			fb.printPixel(x,y,255,255,255);
+			fbd.printPixel(x,y,255,255,255);
 		}else{
-	 		fb.printPixel(x,y,red,green,blue);
+	 		fbd.printPixel(x,y,red,green,blue);
 		}
 		ordinat++;
             }

@@ -11,32 +11,34 @@ const struct timespec* delay = (const struct timespec[]){{0,2*16666667L}};
 
 int main() {
 	RenderHome home;
-	home.render();
 
 /*
+	vector<Renderable * > bangunan = Renderable::parseFile("res/bangunanitb.txt", 1,20,20,255);
+	vector<Renderable * > jalan = Renderable::parseFile("res/jalan2.txt", 1.37, 20,20,20);
+	jalan.insert(jalan.end(),bangunan.begin(), bangunan.end());
 
-    vector<Renderable * > bangunan = Renderable::parseFile("res/bangunanitb.txt", 1,20,20,255);
-    vector<Renderable * > jalan = Renderable::parseFile("res/jalan2.txt", 1.37, 20,20,20);
-    jalan.insert(jalan.end(),bangunan.begin(), bangunan.end());
-
-    Canvas* canvas = new Canvas(jalan);
+	Canvas* canvas = new Canvas(jalan);
 	vDriver = new ViewportDriver(0,0,canvas);
-    startKeystrokeThread();
+	
 	int dum;
-    cin >> dum;
-    while(1){
-        //print viewport di sini
-        //cout << p.getX() << " " << p.getY() << endl;
-        nanosleep(delay,NULL);
-    }
+	cin >> dum;
+*/    	
+	startKeystrokeThread();
+	while(1){
+		
+		home.render();
+        	//print viewport di sini
+        	//cout << p.getX() << " " << p.getY() << endl;
+        	nanosleep(delay,NULL);
+    	}
 
-    garbageCaptureKeyboard();
-*/
+	garbageCaptureKeyboard();
+
 }
 
 void initCaptureKeyboard() {
     // Input keyboard device file
-    const char *dev = "/dev/input/event3";
+    const char *dev = "/dev/input/event2";
     struct input_event ev;
     ssize_t n;
     int fd;
@@ -78,15 +80,21 @@ void initCaptureKeyboard() {
             if(ev.value == 1) // when it pressed
 
                 switch(ev.code){
-                    case 12:
-                        // Minus triggered
+                    case 2:
+			//1 pressed
+                        // 12 Minus triggered
                         //if(scale > 1) scale--;
-                        cout<<"Minus"<<endl;
+                        cout<<"you choose 1"<<endl;
                         break;
-                    case 13:
-                        // plus triggered
+                    case 3:
+                        // 13 plus triggered
                         //if(scale < 10) scale++;
-                        cout<<"Plus"<<endl;
+                        cout<<"you choose 2"<<endl;
+                        break;
+		    case 4:
+                        // 13 plus triggered
+                        //if(scale < 10) scale++;
+                        cout<<"you choose 3"<<endl;
                         break;
                     case 25:
                         // P trigger
