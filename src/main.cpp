@@ -36,7 +36,6 @@ void startDevice();
 void getPixelColor(int x, int y, int *rColor, int *gColor, int *bColor);
 void clearScreen();
 
-RGB color_map[HEIGHT][WIDTH];
 
 void initCaptureKeyboard();
 void garbageCaptureKeyboard();
@@ -47,6 +46,7 @@ const struct timespec* delay = (const struct timespec[]){{0,2*16666667L}};
 FramebufferDriver fbDriver;
 int menu = 0;
 RenderHome* home;
+JetshooterDriver jetshooterDriver;
 int main() {
 
     fbDriver.init();
@@ -113,14 +113,6 @@ int main() {
     }
     }
 
-   while(1){
-        // test
-        // cout << "test0" << endl;
-        //print viewport di sini
-        //cout << p.getX() << " " << p.getY() << endl;
-        nanosleep(delay,NULL);
-    }
-
 
 	garbageCaptureKeyboard();
 
@@ -184,7 +176,8 @@ void initCaptureKeyboard() {
                     case 3:
                         // 13 plus triggered
                         //if(scale < 10) scale++;
-                        cout<<"you choose 2"<<endl;
+                        // cout<<"you choose 2"<<endl;
+                        jetshooterDriver.render();
                         break;
 		    case 4:
                         // 13 plus triggered
@@ -355,13 +348,6 @@ void drawLine(Point p1, Point p2, int thickness, int colorR, int colorG, int col
     }
 }
 
-void clearScreen() {
-    for (int h = 0; h < HEIGHT; h++){
-        for (int w = 0; w < WIDTH; w++) {
-            printPixel(w,h,color_map[h][w].cR,color_map[h][w].cG,color_map[h][w].cB);
-        }
-    }
-}
 
 void getPixelColor(int x, int y, int *rColor, int *gColor, int *bColor) {
       location = (x+vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
