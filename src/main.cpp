@@ -8,7 +8,7 @@ void startKeystrokeThread();
 ViewportDriver *vDriver;
 Point p(0,0);
 const struct timespec* delay = (const struct timespec[]){{0,2*16666667L}};
-int menu = 0;
+int menu = 0, setZero = 0;
 
 int main() {
 	RenderHome home;
@@ -28,7 +28,7 @@ int main() {
 	
 	while(1){
 		//cout << menu << endl;
-        	if(menu == 3){//print viewport di sini
+        if(menu == 3){//print viewport di sini
 			vDriver = new ViewportDriver(0,0,canvas);        		
 			while(1){			
 				cout << dum;
@@ -39,11 +39,13 @@ int main() {
 					break;				
 				}
 			}
-		}else if(menu == 0){
-			home.render();
-			nanosleep(delay,NULL);		
+			setZero = 0;
+		}else if(menu == 0 && not setZero){
+				setZero = 1;
+				home.render();
+				nanosleep(delay,NULL);	
+			}	
 		}
-    	}
 
 	garbageCaptureKeyboard();
 
@@ -51,7 +53,7 @@ int main() {
 
 void initCaptureKeyboard() {
     // Input keyboard device file
-    const char *dev = "/dev/input/event2";
+    const char *dev = "/dev/input/event3";
     struct input_event ev;
     ssize_t n;
     int fd;
