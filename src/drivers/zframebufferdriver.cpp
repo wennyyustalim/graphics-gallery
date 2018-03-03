@@ -37,6 +37,7 @@ void FramebufferDriver::init() {
         exit(4);
     }
     printf("The framebuffer device was mapped to memory successfully.\n");
+    scanFont();
 }
 
 void FramebufferDriver::clearScreen() {
@@ -57,4 +58,52 @@ void FramebufferDriver::printPixel(int x, int y, int colorR, int colorG, int col
         *(fbp + location + 2) = colorR;     //Red Color
         *(fbp + location + 3) = 0;          //Transparancy
     }
+}
+
+void FramebufferDriver::scanFont(){
+	FILE *fp;
+	int i,j;
+	fp = fopen("res/alphabet.txt","r");
+	if(fp==NULL){
+		printf("File tidak ada\n");
+		return;
+	}
+
+	for(i=0;i<960;i++){
+		fscanf(fp, "%s", a[i]);
+	}
+	fclose(fp);
+}
+
+void FramebufferDriver::renderFont(string text, int idxBaris, int idxKolom, int red, int green, int blue){
+	int i,x,y;
+	int pjg = text.length();
+    for(i=0;i<pjg;i++){
+        char kar = text[i];
+        int absis = (kar-'A')*32, ordinat = 0; //menentukan indeks baris dan kolom dari array of char
+	if(kar == '1'){
+		absis = 864;
+	}else if(kar == '2'){
+		absis = 896;	
+	}else if(kar == '3'){
+		absis = 928;
+	}
+        if(kar==' '){absis = 832;}
+        
+        for (y = idxBaris; y < idxBaris+32; y++){
+            for (x = idxKolom; x < idxKolom+32; x++) {
+		if(a[absis][ordinat] == '0'){
+			printPixel(x,y,255,255,255);
+		}else{
+	 		printPixel(x,y,red,green,blue);
+		}
+		ordinat++;
+            }
+            absis++;
+            ordinat = 0;
+        }
+        idxKolom+=32;
+        if(idxKolom>=700){idxKolom = 0; idxBaris+=34;} //jika melebihi pixel column..lanjutkan di baris selanjutnya dan idxKolom direset jadi 0
+    }
+
 }

@@ -54,7 +54,11 @@ FramebufferDriver fbDriver;
 int menu = 0;
 
 int main() {
-	RenderHome home;
+
+    fbDriver.init();
+    fbDriver.clearScreen();
+	
+	RenderHome home(fbDriver);
 	home.render();
 	startKeystrokeThread();
 	
@@ -64,9 +68,6 @@ int main() {
 
     Canvas* canvas = new Canvas(jalan);
     
-    fbDriver.init();
-    fbDriver.clearScreen();
-	
 	
 	int dum = 9;
 	//cin >> dum;
@@ -105,7 +106,7 @@ int main() {
 
 void initCaptureKeyboard() {
     // Input keyboard device file
-    const char *dev = "/dev/input/event3";
+    const char *dev = "/dev/input/event2";
     struct input_event ev;
     ssize_t n;
     int fd;
