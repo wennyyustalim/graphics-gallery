@@ -48,7 +48,11 @@ FramebufferDriver fbDriver;
 int menu = 0;
 
 int main() {
-	RenderHome home;
+
+    fbDriver.init();
+    fbDriver.clearScreen();
+	
+	RenderHome home(fbDriver);
 	home.render();
 	startKeystrokeThread();
 	
@@ -58,9 +62,6 @@ int main() {
 
     Canvas* canvas = new Canvas(jalan);
     
-    fbDriver.init();
-    fbDriver.clearScreen();
-	
 	
 	int dum = 9;
 	//cin >> dum;

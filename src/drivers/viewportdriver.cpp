@@ -84,7 +84,7 @@ void ViewportDriver::renderCanvas() {
 }
 
 void ViewportDriver::renderOptions() {
-	/* render button */
+	/* render bangunan button */
 	for(int x=500; x<520;x++) {
 		for(int y=50; y<70;y++) {
 			if(bangunan_on || x==500 || x==519 || y==50 || y==69)
@@ -95,6 +95,7 @@ void ViewportDriver::renderOptions() {
 		}
 	}
 
+	/* render jalan button */
 	for(int x=500; x<520;x++) {
 		for(int y=90; y<110;y++) {
 			if(jalan_on || x==500 || x==519 || y==90 || y==109)
@@ -104,4 +105,9 @@ void ViewportDriver::renderOptions() {
 			}
 		}
 	}
+
+	/* render bangunan font */
+	
+	fb_driver.renderFont("BGN", 45, 550, 0, 25, 79);
+	fb_driver.renderFont("JLN", 85, 550, 0, 25, 79);
 }

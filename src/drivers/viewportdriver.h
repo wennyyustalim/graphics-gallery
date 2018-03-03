@@ -8,7 +8,6 @@ class ViewportDriver {
 		int x_offset;
 		int y_offset;
 		FramebufferDriver fb_driver;
-		
 	public:
 		bool bangunan_on;
 		bool jalan_on;
