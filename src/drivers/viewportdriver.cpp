@@ -39,7 +39,7 @@ bool ViewportDriver::isXinViewport(int x) {
 }
 
 bool ViewportDriver::isYinViewport(int y) {
-	return (y >= y_offset && y <= VIEWPORT_WIDTH+y_offset);
+	return (y >= y_offset && y <= VIEWPORT_HEIGHT+y_offset);
 }
 
 bool ViewportDriver::isPointInViewPort(int x, int y) {

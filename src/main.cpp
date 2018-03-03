@@ -23,8 +23,8 @@ int main() {
 	vDriver = new ViewportDriver(0,0,canvas);
     startKeystrokeThread();
 	int dum;
+    cin >> dum;
     while(1){
-	cin >> dum;
         //print viewport di sini
         //cout << p.getX() << " " << p.getY() << endl;
         nanosleep(delay,NULL);
@@ -36,7 +36,7 @@ int main() {
 
 void initCaptureKeyboard() {
     // Input keyboard device file
-    const char *dev = "/dev/input/event2";
+    const char *dev = "/dev/input/event3";
     struct input_event ev;
     ssize_t n;
     int fd;
