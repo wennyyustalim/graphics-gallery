@@ -8,7 +8,10 @@ class ViewportDriver {
 		int x_offset;
 		int y_offset;
 		FramebufferDriver fb_driver;
+		
 	public:
+		bool bangunan_on;
+		bool jalan_on;
 		ViewportDriver(int, int,Canvas*, FramebufferDriver&);
 		void moveLeft();
 		void moveRight();
@@ -17,7 +20,8 @@ class ViewportDriver {
 		void renderCanvas();
 		bool isXinViewport(int x);
 		bool isYinViewport(int y);
-		bool isPointInViewPort(int x, int y);	
+		bool isPointInViewPort(int x, int y);
+		void renderOptions();	
 };
 
 

@@ -5,6 +5,8 @@ ViewportDriver::ViewportDriver(int x, int y, Canvas* canvas, FramebufferDriver& 
 	y_offset = y;
 	fb_driver = fbDriver;
     this->canvas = canvas;
+    bangunan_on = true;
+    jalan_on = true;
     renderCanvas();
 }
 void ViewportDriver::moveLeft() {
@@ -61,6 +63,44 @@ void ViewportDriver::renderCanvas() {
 				int b = curr.cB;
 				int g = curr.cG;
 				fb_driver.printPixel(c,r,re,g,b);
+				if(re==20&&g==20&&b==255) {
+					if(bangunan_on) {
+						fb_driver.printPixel(c,r,re,g,b);
+					}	else {
+						fb_driver.printPixel(c,r,255,255,255);
+					}
+				} else if(re==20&&g==20&&b==20) {
+					if(jalan_on) {
+						fb_driver.printPixel(c,r,re,g,b);
+					}	else {
+						fb_driver.printPixel(c,r,255,255,255);
+					}
+				}
+				
+			}
+		}
+	}
+	renderOptions();
+}
+
+void ViewportDriver::renderOptions() {
+	/* render button */
+	for(int x=500; x<520;x++) {
+		for(int y=50; y<70;y++) {
+			if(bangunan_on || x==500 || x==519 || y==50 || y==69)
+				fb_driver.printPixel(x,y,20,20,20);
+			else {
+
+			}
+		}
+	}
+
+	for(int x=500; x<520;x++) {
+		for(int y=90; y<110;y++) {
+			if(jalan_on || x==500 || x==519 || y==90 || y==109)
+				fb_driver.printPixel(x,y,20,20,20);
+			else {
+
 			}
 		}
 	}
