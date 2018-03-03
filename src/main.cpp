@@ -46,14 +46,14 @@ Point p(0,0);
 const struct timespec* delay = (const struct timespec[]){{0,2*16666667L}};
 FramebufferDriver fbDriver;
 int menu = 0;
-
+RenderHome* home;
 int main() {
 
     fbDriver.init();
     fbDriver.clearScreen();
 	
-	RenderHome home(fbDriver);
-	home.render();
+	home = new RenderHome(fbDriver);
+	home->render();
 	startKeystrokeThread();
 	
     vector<Renderable * > bangunan = Renderable::parseFile("res/bangunanitb.txt", 1,20,20,255);
@@ -70,12 +70,14 @@ int main() {
     int xMouse = 0, yMouse = 0;
     startKeystrokeThread();
 
-
-	
+    vDriver = new ViewportDriver(0,0,canvas,fbDriver);              
+	int last_menu = 0;
 	while(1){
+        if(menu != last_menu) {
+            last_menu=menu;
 		//cout << menu << endl;
         	if(menu == 3){//print viewport di sini
-			vDriver = new ViewportDriver(0,0,canvas,fbDriver);        		
+             vDriver->renderCanvas();
 			while(1){			
 				//cout << p.getX() << " " << p.getY() << endl;
                     Mice pMouse = mouseController();
@@ -103,10 +105,12 @@ int main() {
 					break;				
 				}
 			}
+
 		}else if(menu == 0){
-			home.render();
+			home->render();
 			nanosleep(delay,NULL);		
 		}
+    }
     }
 
    while(1){
@@ -186,9 +190,11 @@ void initCaptureKeyboard() {
                         // 13 plus triggered
                         //if(scale < 10) scale++;
                         //cout<<"you choose 3"<<endl;
-			menu = 3;                        
+			vDriver->renderCanvas();
+            menu = 3;                        
 			break;
 		    case 11:
+            home->render();
                         // 13 plus triggered
                         //if(scale < 10) scale++;
                         //cout<<"you choose 3"<<endl;

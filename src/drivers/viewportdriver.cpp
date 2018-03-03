@@ -7,7 +7,6 @@ ViewportDriver::ViewportDriver(int x, int y, Canvas* canvas, FramebufferDriver& 
     this->canvas = canvas;
     bangunan_on = true;
     jalan_on = true;
-    renderCanvas();
 }
 void ViewportDriver::moveLeft() {
 	if(x_offset > 0) {
