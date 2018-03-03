@@ -6,30 +6,43 @@ void initCaptureKeyboard();
 void garbageCaptureKeyboard();
 void startKeystrokeThread();
 ViewportDriver *vDriver;
-Point p(2,5);
+Point p(0,0);
 const struct timespec* delay = (const struct timespec[]){{0,2*16666667L}};
+int menu = 0;
 
 int main() {
 	RenderHome home;
-
-/*
+	home.render();
+	startKeystrokeThread();
+	
 	vector<Renderable * > bangunan = Renderable::parseFile("res/bangunanitb.txt", 1,20,20,255);
 	vector<Renderable * > jalan = Renderable::parseFile("res/jalan2.txt", 1.37, 20,20,20);
 	jalan.insert(jalan.end(),bangunan.begin(), bangunan.end());
 
 	Canvas* canvas = new Canvas(jalan);
-	vDriver = new ViewportDriver(0,0,canvas);
 	
-	int dum;
-	cin >> dum;
-*/    	
-	startKeystrokeThread();
+	
+	int dum = 9;
+	//cin >> dum;
+    	
+	
 	while(1){
-		
-		home.render();
-        	//print viewport di sini
-        	//cout << p.getX() << " " << p.getY() << endl;
-        	nanosleep(delay,NULL);
+		//cout << menu << endl;
+        	if(menu == 3){//print viewport di sini
+			vDriver = new ViewportDriver(0,0,canvas);        		
+			while(1){			
+				cout << dum;
+
+				//cout << p.getX() << " " << p.getY() << endl;
+        			nanosleep(delay,NULL);
+				if(menu != 3){
+					break;				
+				}
+			}
+		}else if(menu == 0){
+			home.render();
+			nanosleep(delay,NULL);		
+		}
     	}
 
 	garbageCaptureKeyboard();
@@ -94,8 +107,15 @@ void initCaptureKeyboard() {
 		    case 4:
                         // 13 plus triggered
                         //if(scale < 10) scale++;
-                        cout<<"you choose 3"<<endl;
-                        break;
+                        //cout<<"you choose 3"<<endl;
+			menu = 3;                        
+			break;
+		    case 11:
+                        // 13 plus triggered
+                        //if(scale < 10) scale++;
+                        //cout<<"you choose 3"<<endl;
+			menu = 0;                        
+			break;
                     case 25:
                         // P trigger
                         //p ^= 1;
