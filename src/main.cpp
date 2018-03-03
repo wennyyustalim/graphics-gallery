@@ -77,9 +77,10 @@ int main() {
             last_menu=menu;
 		//cout << menu << endl;
         	if(menu == 3){//print viewport di sini
-             vDriver->renderCanvas();
-			while(1){			
-				//cout << p.getX() << " " << p.getY() << endl;
+                 vDriver->renderCanvas();
+
+    			while(1){			
+    				//cout << p.getX() << " " << p.getY() << endl;
                     Mice pMouse = mouseController();
         // cout << "test1" << endl;
                     // fbDriver.clearScreen();
@@ -101,19 +102,17 @@ int main() {
 
                 
         			nanosleep(delay,NULL);
-				if(menu != 3){
-					break;				
-				}
-			}
+        			if(menu != 3){
+        				break;				
+        			}
+    			}
 
 		}else if(menu == 0){
 			home->render();
 			nanosleep(delay,NULL);		
 		}
+        }
     }
-    }
-
-
 	garbageCaptureKeyboard();
 
 
