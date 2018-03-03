@@ -7,3 +7,4 @@
 #include <utils/circle.h>
 #include <utils/line.h>
 #include <utils/point.h>
+#include <utils/rgb.h>

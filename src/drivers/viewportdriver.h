@@ -9,7 +9,7 @@ class ViewportDriver {
 		int y_offset;
 		FramebufferDriver fb_driver;
 	public:
-		ViewportDriver(int, int,Canvas*);
+		ViewportDriver(int, int,Canvas*, FramebufferDriver&);
 		void moveLeft();
 		void moveRight();
 		void moveUp();
