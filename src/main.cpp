@@ -75,8 +75,12 @@ int main() {
 	while(1){
         if(menu != last_menu) {
             last_menu=menu;
+            if (menu == 1){
+				VFont vFont;
+				vFont.scanFont();
+			}
 		//cout << menu << endl;
-        	if(menu == 3){//print viewport di sini
+        	else if(menu == 3){//print viewport di sini
                  vDriver->renderCanvas();
 
     			while(1){			
@@ -170,7 +174,8 @@ void initCaptureKeyboard() {
 			//1 pressed
                         // 12 Minus triggered
                         //if(scale > 1) scale--;
-                        cout<<"you choose 1"<<endl;
+                        //cout<<"you choose 1"<<endl;
+                        menu = 1;
                         break;
                     case 3:
                         // 13 plus triggered

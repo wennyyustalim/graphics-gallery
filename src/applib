@@ -1,4 +1,5 @@
 #include <drivers/jetshooterdriver.h>
+#include <drivers/vectorFont.h>
 #include <drivers/viewportdriver.h>
 #include <drivers/xrenderhome.h>
 #include <drivers/zframebufferdriver.h>
