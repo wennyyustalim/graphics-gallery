@@ -47,6 +47,7 @@ FramebufferDriver fbDriver;
 int menu = 0;
 RenderHome* home;
 JetshooterDriver jetshooterDriver;
+FirstFilm firstfilm;
 int main() {
 
     fbDriver.init();
@@ -128,7 +129,7 @@ int main() {
 
 void initCaptureKeyboard() {
     // Input keyboard device file
-    const char *dev = "/dev/input/event3";
+    const char *dev = "/dev/input/event2";
     struct input_event ev;
     ssize_t n;
     int fd;
@@ -190,6 +191,12 @@ void initCaptureKeyboard() {
 			vDriver->renderCanvas();
             menu = 3;                        
 			break;
+		    case 5:
+                        // 13 plus triggered
+                        //if(scale < 10) scale++;
+                        // cout<<"you choose 2"<<endl;
+                        firstfilm.render();
+                        break;
 		    case 11:
             home->render();
                         // 13 plus triggered

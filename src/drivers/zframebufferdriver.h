@@ -10,7 +10,7 @@ class FramebufferDriver {
 		int fbfd;
 		long int screensize;
 		long int location;
-		char a[960][35];
+		char a[992][35];
 
 		FramebufferDriver();
 		void init();

@@ -69,7 +69,7 @@ void FramebufferDriver::scanFont(){
 		return;
 	}
 
-	for(i=0;i<960;i++){
+	for(i=0;i<992;i++){
 		fscanf(fp, "%s", a[i]);
 	}
 	fclose(fp);
@@ -87,6 +87,8 @@ void FramebufferDriver::renderFont(string text, int idxBaris, int idxKolom, int 
 		absis = 896;	
 	}else if(kar == '3'){
 		absis = 928;
+	}else if(kar == '4'){
+		absis = 960;
 	}
         if(kar==' '){absis = 832;}
         

@@ -20,4 +20,6 @@ void RenderHome::render(){
 	fbd.renderFont(text,275 + menu_offset,270,0,25,79);
 	text = "3 MAP";
 	fbd.renderFont(text,315 + menu_offset,270,0,25,79);
+	text = "4 GAMES";
+	fbd.renderFont(text,355 + menu_offset,270,0,25,79);
 }
