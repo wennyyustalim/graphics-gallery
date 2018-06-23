@@ -17,6 +17,4 @@ class FramebufferDriver {
 		void clearScreen();
 };
 
-
-
 #endif

@@ -8,25 +8,20 @@ vector<Point>& Renderable::getPoints() {
     return points;
 }
 
-
 vector<Renderable *> Renderable::parseFile(string filename, double scale, int red, int green, int blue) {
     vector<Renderable *> result;
     FILE * pFile;
     pFile = fopen(filename.c_str(),"r");
-    //~ fprintf(stderr,"Reading new File: %s\n", filename.c_str());
     int q;
     while(fscanf(pFile, "%d", &q) && q!= -999) {
 
         int x, y;
 
-        //~ fprintf(stderr,"Reading shape with %d point\n", q);
         Renderable *buffer = new Renderable();
         while(q--) {
 
             fscanf(pFile, "%d %d\n", &x, &y);
-            //~ fprintf(stderr,"Reading point: %d %d\n",x ,y);
             Point pBuff(x * scale,y * scale);
-            //~ fprintf(stderr, "Add point : %d %d", pBuff.getX(), pBuff.getY());
             buffer->getPoints().push_back(pBuff);
         }
         result.push_back(buffer);
@@ -61,7 +56,6 @@ void Renderable::createBorder(){
 	int dx,dy;
 	int derr,err;
 	int x,y;
-    //~ fprintf(stderr,"Points size: %d\n", points.size());
 	for (int i = 0; i < points.size(); i++)
 	{
 		Point t1 = points[i];
@@ -70,8 +64,6 @@ void Renderable::createBorder(){
 		x2 = t2.getX();
 		y1 = t1.getY();
 		y2 = t2.getY();
-        //~ fprintf(stderr, "Creating line from %d %d to %d %d\n",x1,y1,x2,y2);
-		//cout << *itr << endl;
 		steep = 0;
 		if(abs(x1-x2) < abs(y1-y2)){
 	        swap(x1, y1);
@@ -113,8 +105,6 @@ void Renderable::rasterColor(){
         xmin = (points[i].getX() < xmin)? points[i].getX():xmin;
         ymin = (points[i].getY() < ymin)? points[i].getY():ymin;
     }    
-    // cout << xmin << " " << ymin << endl;
-    // cout << xmax << " " << ymax << endl;
     unsigned char onFlag = 0;
     unsigned char started = 0;
     for(int i = 0; i < ymax-ymin+1; i++) {
@@ -134,15 +124,11 @@ void Renderable::rasterColor(){
                 nPoint++;
             }
         }
-        //printf("i: %d, nPoint: %d\n", i, nPoint);
         int median = -1;
         
         if(nPoint % 2 != 0) {
             median = nPoint / 2;
         }
-        // cout << nPoint << endl;
-        //printf("median: %d\n", median);
-        //printf("Start Printing::\n");
         if(nPoint > 1 && i!=0 && i!=(xmax-xmin+1)) {
             for(int it = 0; it < nPoint-1; it+=2) {
                 if(it == median) {
@@ -152,13 +138,11 @@ void Renderable::rasterColor(){
                 int endPoint = it+1;
                 if(endPoint == median)
                     endPoint++;
-                //printf("SP: %d %d EP %d %d\n", startPoint, arr[startPoint], endPoint, arr[endPoint]);
                 if(endPoint < nPoint){
                     if(arr[endPoint] > arr[startPoint]){
                         for(int jt = arr[startPoint]; jt < arr[endPoint];jt++){
                             int x = xmin + jt;
                             pixels[x][y] = true;
-                            //~ fprintf(stderr, "Filling point %d %d\n", x, y);
                         }
                     }
                 }
@@ -170,5 +154,3 @@ void Renderable::rasterColor(){
 std::unordered_map<int, std::unordered_map<int, bool> >& Renderable::getPixels() {
     return pixels;
 };
-
-

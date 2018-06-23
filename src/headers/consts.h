@@ -1,5 +1,3 @@
-
-
 #ifndef _APP_CONST_
 #define _APP_CONST_
 
